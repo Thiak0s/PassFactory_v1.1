@@ -1,4 +1,4 @@
-**README - PassFactory v1.1**
+**README - PassFactory v1.1.2**
 
 ## PassFactory - Generador de Contraseñas Personalizadas
 
@@ -57,10 +57,10 @@ PassFactory es una herramienta diseñada para generar contraseñas y diccionario
 
 ### Ejemplos de Uso
 
-1. Generar contraseñas con letras mayúsculas y minúsculas, dígitos y caracteres especiales, sin duplicados, con longitud 12:
+1. Generar 10 contraseñas con letras mayúsculas y minúsculas, dígitos y caracteres especiales, sin duplicados, con longitud 12:
 
    ```bash
-   python passfactory.py -base dLcs --len 12 --no_duplicate
+   python passfactory.py -base dLcs --len 12 --num_pass 10 --no_duplicate
    ```
 
 2. Generar una contraseña que comienza con un número y termina con una letra:
