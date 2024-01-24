@@ -1,11 +1,20 @@
 import argparse
-import pyfiglet
-from termcolor import colored
+import os
+import pyperclip
 import random
 import string
-import pyperclip
+from termcolor import colored
 
 def print_author_info():
+    print(colored("  _____              ______         _                   ", color="cyan", attrs=["bold"]))
+    print(colored(" |  __ \\            |  ____|       | |                  ", color="cyan", attrs=["bold"]))
+    print(colored(" | |__) |_ _ ___ ___| |__ __ _  ___| |_ ___  _ __ _   _ ", color="cyan", attrs=["bold"]))
+    print(colored(" |  ___/ _` / __/ __|  __/ _` |/ __| __/ _ \\| '__| | | |", color="cyan", attrs=["bold"]))
+    print(colored(" | |  | (_| \\__ \\__ \\ | | (_| | (__| || (_) | |  | |_| |", color="cyan", attrs=["bold"]))
+    print(colored(" |_|   \\__,_|___/___/_|  \\__,_|\\___|\\__\\___/|_|   \\__, |", color="cyan", attrs=["bold"]))
+    print(colored("                                                  __/ |", color="cyan", attrs=["bold"]))
+    print(colored("                                                 |___/ ", color="cyan", attrs=["bold"]))
+    print(colored("\n\t\t\t\t\t\t\tv1.1.2\n", color="red", attrs=["bold"]))
     print("\n--- Información del Autor y Descripción ---\n")
     print(colored("******** ¡Esto es ", color="white") + colored("PassFactory v1.1", color="cyan", attrs=["bold"]) + colored("! *******\n", color="white"))
     print("[Herramienta creada por " + colored("thiak0s", color="yellow") + " - 2024]\n")
@@ -55,8 +64,15 @@ def generate_passwords(args):
 
         if args.no_duplicate:
             password = "".join(sorted(set(password), key=password.index))
+        
+        if args.output:
+            save_path = args.output
+        else:
+            save_path = os.path.join(os.getcwd(), "passwords.txt")
 
-        # Asegurar la longitud final
+        with open(save_path, 'w') as f:
+            f.write("\n".join(password_list))
+        
         password += random.choice(string.ascii_letters) * max(0, args.length - len(password))
         password_list.append(password[:args.length])
 
@@ -99,27 +115,13 @@ def parse_arguments():
 
     parser.add_argument("--num_pass", dest="num_pass", type=int, default=1, help="Número de contraseñas a generar")
 
-    parser.add_argument("-o", "--output", dest="output", default="", help="Directorio de salida para el archivo de contraseñas")
+    parser.add_argument("-o", "--output", dest="output", default="", help="Ruta de salida para el archivo de contraseñas. Si no se proporciona, se guardará en el directorio actual con el nombre 'passwords.txt'.")
     parser.add_argument("-np", "--no_print", dest="no_print", action="store_true", help="No imprimir las contraseñas en pantalla")
     parser.add_argument("-x", "--exit_after_generation", dest="exit_after_generation", action="store_true", help="Salir directamente después de generar las contraseñas")
 
     return parser.parse_args()
 
 def main():
-    title_part1 = pyfiglet.figlet_format("PassFactory", font="slant")
-    title_part2 = pyfiglet.figlet_format("v1.1", font="stop")
-
-    lines1 = title_part1.split('\n')
-    lines2 = title_part2.split('\n')
-    max_lines = max(len(lines1), len(lines2))
-
-    lines1 += [''] * (max_lines - len(lines1))
-    lines2 += [''] * (max_lines - len(lines2))
-
-    for line1, line2 in zip(lines1, lines2):
-        colored_title_part1 = colored(line1, color="cyan", attrs=["bold"])
-        colored_title_part2 = colored(line2, color="red", attrs=["bold"])
-        print(colored_title_part1 + " " + colored_title_part2)
 
     print_author_info()
 
