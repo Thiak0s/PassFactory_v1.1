@@ -8,12 +8,6 @@
 
 PassFactory es una herramienta diseñada para generar contraseñas y diccionarios personalizados. Esta utilidad está dirigida a usuarios avanzados en el campo de ciberseguridad y pentesting.
 
-### Información del Autor
-
-- **Herramienta creada por:** [thiak0s](https://github.com/thiak0s)
-- **Versión:** 1.1
-- **Año de Creación:** 2024
-
 ### Características Principales
 
 - Generación de contraseñas personalizadas según especificaciones.
